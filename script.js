@@ -97,11 +97,45 @@ function bukaAmplop() {
     quoteDiv.innerText = randomQuote;
     quoteDiv.style.opacity = 1;
 
-    // Tombol main lagi
     const mainLagiBtn = document.createElement('button');
     mainLagiBtn.innerText = "Main Lagi 🔄";
     mainLagiBtn.onclick = resetGame;
     mainLagiBtn.id = "mainLagiBtn";
+    document.body.appendChild(mainLagiBtn);
+  }, 1000);
+  changeBackground();
+}
+
+function resetGame() {
+  selectedAnimal = "";
+  selectedSub = "";
+
+  const amplop = document.getElementById('amplop');
+  amplop.style.display = 'none';
+  amplop.classList.remove('open');
+
+  const quoteDiv = document.getElementById('quote');
+  quoteDiv.style.opacity = 0;
+  quoteDiv.innerText = "";
+
+  const btn = document.getElementById('mainLagiBtn');
+  if (btn) btn.remove();
+
+  showFirstQuestion();
+}
+
+function changeBackground() {
+  const colors = [
+    'linear-gradient(45deg, #ff9a9e, #fad0c4)',
+    'linear-gradient(45deg, #a1c4fd, #c2e9fb)',
+    'linear-gradient(45deg, #fbc2eb, #a6c1ee)',
+    'linear-gradient(45deg, #fdfbfb, #ebedee)',
+    'linear-gradient(45deg, #84fab0, #8fd3f4)',
+    'linear-gradient(45deg, #ffecd2, #fcb69f)'
+  ];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  document.body.style.background = randomColor;
+}    mainLagiBtn.id = "mainLagiBtn";
     document.body.appendChild(mainLagiBtn);
   }, 1000);
   changeBackground();
