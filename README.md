@@ -32,4 +32,3 @@ Shemday-Glow-Within/
 ├── style.css        # CSS dan animasi
 ├── script.js        # Logic interaktif & quotes
 ├── README.md        # Dokumentasi project
-└── .gitignore       # Opsional, misal untuk cache atau OS files
