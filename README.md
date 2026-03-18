@@ -8,7 +8,7 @@ Game ini aku rancang untuk menghadirkan pengalaman hangat dan inspiratif melalui
 ## 🕹️ Cara Main
 
 1. Buka `index.html` di browser (Chrome, Firefox, Edge, dll).  
-2. Baca **penjelasan awal Shemday** (ditampilkan selama 5 detik).  
+2. Baca **penjelasan awal Shemday** (ditampilkan selama 10 detik).  
 3. Jawab pertanyaan pertama: “Kalo kamu terlahir kembali, kamu pilih jadi apa?”  
    - Pilihan: Kucing 🐱 atau Anjing 🐶  
 4. Pilih sub-pertanyaan (misal: warna kucing atau jenis anjing).  
