@@ -96,8 +96,33 @@ function bukaAmplop() {
     const quoteDiv = document.getElementById('quote');
     quoteDiv.innerText = randomQuote;
     quoteDiv.style.opacity = 1;
+
+    // Tombol main lagi
+    const mainLagiBtn = document.createElement('button');
+    mainLagiBtn.innerText = "Main Lagi 🔄";
+    mainLagiBtn.onclick = resetGame;
+    mainLagiBtn.id = "mainLagiBtn";
+    document.body.appendChild(mainLagiBtn);
   }, 1000);
   changeBackground();
+}
+
+function resetGame() {
+  selectedAnimal = "";
+  selectedSub = "";
+
+  const amplop = document.getElementById('amplop');
+  amplop.style.display = 'none';
+  amplop.classList.remove('open');
+
+  const quoteDiv = document.getElementById('quote');
+  quoteDiv.style.opacity = 0;
+  quoteDiv.innerText = "";
+
+  const btn = document.getElementById('mainLagiBtn');
+  if (btn) btn.remove();
+
+  showFirstQuestion();
 }
 
 function changeBackground() {
@@ -111,4 +136,4 @@ function changeBackground() {
   ];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   document.body.style.background = randomColor;
-}
+      }
