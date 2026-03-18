@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Shemday: The Glow Within</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background 1s ease;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  }
+
+  h1 {
+    color: #fff;
+    text-shadow: 2px 2px 8px #000;
+    margin-bottom: 10px;
+  }
+
+  .description, .question, .options, .quote {
+    margin: 20px;
+    color: #fff;
+  }
+
+  .description {
+    font-size: 18px;
+    max-width: 80%;
+    line-height: 1.5;
+  }
+
+  button {
+    margin: 5px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.3s;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #fff;
+  }
+
+  .quote {
+    font-size: 22px;
+    font-weight: bold;
+    max-width: 80%;
+    opacity: 0;
+    transition: opacity 2s ease-in;
+    text-shadow: 2px 2px 6px #000;
+  }
+
+  .amplop {
+    width: 120px;
+    height: 80px;
+    background: #fff;
+    border-radius: 12px;
+    margin: 20px auto;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.5s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  .amplop::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+    transition: clip-path 1s ease-in-out;
+  }
+
+  .amplop.open::before {
+    clip-path: polygon(0 0, 0 0, 100% 0, 100% 0, 0 0);
+  }
+</style>
+</head>
+<body>
+
+<h1>Shemday: The Glow Within ✨</h1>
+
+<div class="description" id="description">
+Selamat datang di Shemday! <br>
+Shemday adalah hari di mana cahaya dalam dirimu bersinar, <br>
+dan setiap pilihan kecil bisa membuka inspirasi baru. <br>
+Jawab pertanyaan di bawah ini untuk membuka amplop berisi quotes dari manusia lucu khusus buat kamu.
+</div>
+
+<div class="question" id="question" style="display:none;"></div>
+<div class="options" id="options" style="display:none;"></div>
+
+<div class="amplop" id="amplop" style="display:none;" onclick="bukaAmplop()"></div>
+<div class="quote" id="quote"></div>
+
+<script>
+const quotes = {
+  "kucing": {
+    "oren": [
+      "Today is all about your light. Shine bright like your favorite orange cat! 🌅",
+      "May your day be as warm and radiant as an orange sunrise. 🍊",
+      "Remember, every small step you take adds light to your path. ✨"
+    ],
+    "hitam": [
+      "Born to bloom, and bloom again—mysterious as a black cat, yet full of wonder. 🖤",
+      "Even in darkness, your light can shine through. 🌌",
+      "Embrace the mystery and magic of today. ✨"
+    ],
+    "putih": [
+      "Wishing you a special day that is as wonderful and pure as a white cat's heart. 🤍",
+      "Let your heart be light, and your spirit be free today. 🕊️",
+      "A pure heart always attracts joy and love. 💖"
+    ]
+  },
+  "anjing": {
+    "golden": [
+      "Congratulations on successfully making it through another year, just like a loyal Golden Retriever 🐾",
+      "Your kindness and loyalty make the world brighter! ✨",
+      "Celebrate today knowing you are truly valued. 🎉"
+    ],
+    "husky": [
+      "Wishing you adventures and joy as boundless as a playful Husky ❄️",
+      "Keep chasing your dreams with energy and courage! 🐾",
+      "Your spirit is as unstoppable as the wind through snowy mountains. 🌨️"
+    ],
+    "bulldog": [
+      "Birthdays are the universe's way of saying you are worth celebrating—happy day, like a calm Bulldog! 🎉",
+      "May your day be filled with calm, joy, and warm moments. ☀️",
+      "Strong, steady, and wonderful—you are appreciated today and always. 💛"
+    ]
+  }
+};
+
+let selectedAnimal = "";
+let selectedSub = "";
+
+setTimeout(() => {
+  document.getElementById('description').style.display = 'none';
+  showFirstQuestion();
+}, 5000);
+
+function showFirstQuestion() {
+  const q = document.getElementById('question');
+  const opts = document.getElementById('options');
+  q.style.display = 'block';
+  opts.style.display = 'block';
+  q.innerText = "Pertanyaan 1: Kalo kamu terlahir kembali, kamu pilih jadi apa?";
+  opts.innerHTML = `
+    <button onclick="choose('kucing')">Kucing 🐱</button>
+    <button onclick="choose('anjing')">Anjing 🐶</button>
+  `;
+  changeBackground();
+}
+
+function choose(animal) {
+  selectedAnimal = animal;
+  const q = document.getElementById('question');
+  const opts = document.getElementById('options');
+  if (animal === "kucing") {
+    q.innerText = "Pilih warna kucing:";
+    opts.innerHTML = `
+      <button onclick="chooseSub('oren')">Oren</button>
+      <button onclick="chooseSub('hitam')">Hitam</button>
+      <button onclick="chooseSub('putih')">Putih</button>
+    `;
+  } else {
+    q.innerText = "Pilih jenis anjing:";
+    opts.innerHTML = `
+      <button onclick="chooseSub('golden')">Golden Retriever</button>
+      <button onclick="chooseSub('husky')">Husky</button>
+      <button onclick="chooseSub('bulldog')">Bulldog</button>
+    `;
+  }
+  changeBackground();
+}
+
+function chooseSub(sub) {
+  selectedSub = sub;
+  document.getElementById('options').style.display = 'none';
+  document.getElementById('question').style.display = 'none';
+  const amplop = document.getElementById('amplop');
+  amplop.style.display = 'block';
+  changeBackground();
+}
+
+function bukaAmplop() {
+  const amplop = document.getElementById('amplop');
+  amplop.classList.add('open');
+  const qArray = quotes[selectedAnimal][selectedSub];
+  const randomQuote = qArray[Math.floor(Math.random() * qArray.length)];
+  setTimeout(() => {
+    const quoteDiv = document.getElementById('quote');
+    quoteDiv.innerText = randomQuote;
+    quoteDiv.style.opacity = 1;
+  }, 1000);
+  changeBackground();
+}
+
+function changeBackground() {
+  const colors = [
+    'linear-gradient(45deg, #ff9a9e, #fad0c4)',
+    'linear-gradient(45deg, #a1c4fd, #c2e9fb)',
+    'linear-gradient(45deg, #fbc2eb, #a6c1ee)',
+    'linear-gradient(45deg, #fdfbfb, #ebedee)',
+    'linear-gradient(45deg, #84fab0, #8fd3f4)',
+    'linear-gradient(45deg, #ffecd2, #fcb69f)'
+  ];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  document.body.style.background = randomColor;
+}
+</script>
+
+</body>
+</html>
